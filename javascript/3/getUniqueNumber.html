@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Set the input HERE
+      let items = [1, 1, 1, 5, 2, 3, 4, 3, 3, 3, 3, 3, 3, 7, 8, 5, 4, 9, 0, 1, 3, 2, 6, 7, 5, 4, 4, 7, 8, 8, 0, 1, 2, 3, 1];
+
+      function getUniqueNumber(items) {
+        const map = new Map();
+        for (const item of items) {
+          if (map.has(item)) {
+            // if map contains the item, set the value to true that means the item is duplicate.
+            map.set(item, true);
+          } else {
+            // if map doesn't contain the item, set the value to false that means the item is first time appearing.
+            map.set(item, false);
+          }
+        }
+
+        for (const [key, value] of map) {
+          // print the output
+          if (value === false) {
+            console.log(key);
+          }
+        }
+      }
+
+      getUniqueNumber(items);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Set the input HERE
+      const userList = [
+        {
+          firstName: "John",
+          lastName: "Wick",
+          customerId: 1234,
+          note: "",
+          profession: "freelancer",
+        },
+        {
+          firstName: "David",
+          lastName: "Beckham",
+          customerId: 5678,
+          note: "",
+          profession: "productOwner",
+        },
+      ];
+
+      function sortUserName(user) {
+        function sortByUserName(userA, userB) {
+          const userNameA = userA.firstName.toLowerCase() + userA.lastName.toLowerCase() + userA.customerId.toString();
+          const userNameB = userB.firstName.toLowerCase() + userB.lastName.toLowerCase() + userB.customerId.toString();
+
+          return userNameA.localeCompare(userNameB);
+        }
+
+        user.sort((a, b) => sortByUserName(a, b));
+
+        return user;
+      }
+
+      const output = sortUserName(userList);
+      console.log("sortUserName", output);
+    </script>
+  </body>
+</html>

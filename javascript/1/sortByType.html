@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // Set the input HERE
+      const userList = [
+        {
+          firstName: "John",
+          lastName: "Wick",
+          customerId: 1234,
+          note: "",
+          profession: "freelancer",
+        },
+        {
+          firstName: "David",
+          lastName: "Beckham",
+          customerId: 5678,
+          note: "",
+          profession: "productOwner",
+        },
+      ];
+
+      function sortByType(user) {
+        const orderOfProfession = new Map([
+          ["systemAnalytics", 1],
+          ["engineer", 2],
+          ["productOwner", 3],
+          ["freelancer", 4],
+          ["student", 5],
+        ]);
+
+        user.sort((a, b) => orderOfProfession.get(a.profession) - orderOfProfession.get(b.profession));
+
+        return user;
+      }
+
+      const output = sortByType(userList);
+      console.log("sortByType", output);
+    </script>
+  </body>
+</html>
