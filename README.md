@@ -5,5 +5,5 @@
    ```bash
    cd react
    npm install
-   npm dev
+   npm run dev
    ```
