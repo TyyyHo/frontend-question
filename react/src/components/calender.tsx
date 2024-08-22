@@ -1,37 +1,64 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useCalender } from "../hook/useCalender";
+import { useDateRange } from "../hook/useDateRange";
 const year = 2024;
+const today = new Date();
+const currentMonth = today.getMonth() + 1;
+console.log(today);
 
 export default function Calender() {
-  const [month, setMonth] = useState<number>(0);
-  const [date, setDate] = useState<number>(1);
+  const [month, setMonth] = useState<number>(currentMonth);
+  const { dateRange, handleDate } = useDateRange();
 
-  useEffect(() => {
-    // set today as default
-    const date = new Date();
-    setMonth(date.getMonth() + 1);
-    setDate(date.getDate());
-  }, []);
+  const dateList = useCalender(month);
 
-  useEffect(() => {
-    // set new date when month changed
-    const date = new Date(year, month - 1, 1);
-    const day = date.getDay();
-    console.log(date.toLocaleString(), day);
-  }, [month]);
+  function handleMonth(type: "plus" | "minus") {
+    if (type === "plus" && month < 12) {
+      setMonth(month + 1);
+    } else if (type === "minus" && month > 1) {
+      setMonth(month - 1);
+    }
+  }
+
   return (
     <section className="calenderContainer">
+      <button style={{ marginBottom: "2rem" }} onClick={() => handleDate(today, "reset")}>
+        Reset
+      </button>
       <div className="header">
-        <button className="selector" onClick={() => setMonth(month - 1)}>
+        <button className="selector" onClick={() => handleMonth("minus")}>
           {"<"}
         </button>
         <p className="headerText">{`${year}年${month}月`}</p>
-        <button className="selector" onClick={() => setMonth(month + 1)}>
+        <button className="selector" onClick={() => handleMonth("plus")}>
           {">"}
         </button>
       </div>
 
-      <div>{date}</div>
-      <div></div>
+      <div className="calender">
+        {dateList.map((date, index) => {
+          return (
+            <button
+              key={index}
+              disabled={date.getMonth() + 1 !== month}
+              className={`dayButton
+                ${date.getMonth() + 1 === month ? "" : "nonCurrentMonth"}
+                ${date.getMonth() === today.getMonth() && date.getDate() === today.getDate() ? "today" : ""}
+                ${
+                  date.getMonth() === dateRange.startDate?.getMonth() &&
+                  date.getDate() >= dateRange.startDate?.getDate() &&
+                  date.getDate() <= dateRange.endDate?.getDate()!
+                    ? "chosenDay"
+                    : ""
+                }
+                `}
+              onClick={() => handleDate(date)}
+            >
+              {date.getDate()}日
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
 }

@@ -33,17 +33,29 @@
   width: 50px;
   height: 36px;
   background-color: white;
+  border: none;
+  text-align: center;
 }
 
 .dayButton:hover {
   background-color: #e6e6e6;
 }
-.dayButton:active {
+.dayButton:enabled:active {
+  background-color: #006edc !important;
+}
+
+.chosenDay {
   background-color: #006edc !important;
 }
 .today {
   background-color: #ffff76;
 }
 .nonCurrentMonth {
-  background-color: #757575;
+  color: #757575;
+  cursor: not-allowed;
+}
+
+.calender {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
