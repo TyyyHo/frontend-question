@@ -4,6 +4,6 @@
 2. Check the folder react for react componet(calender).
    ```bash
    cd react
-   npm i
+   npm install
    npm dev
    ```
